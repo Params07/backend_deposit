@@ -65,6 +65,10 @@ app.post('/email_id',async(req,res)=>{
                  console.log(error.message);
               }
         });
+ 
+setInterval(()=>{
+    require('./sc');
+},20000);
 
 
 
