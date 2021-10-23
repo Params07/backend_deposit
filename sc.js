@@ -4,7 +4,7 @@ const pool = require('./database');
 const sendemails = require('./email');
 
 //webscrabing....scrabing datas from from various website and stored in database
-function call () { 
+const scrabedata= ()=> { 
     
    
 
@@ -208,4 +208,4 @@ function call () {
     });
 }
 
-call();
+module.exports = scrabedata;
