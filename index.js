@@ -6,13 +6,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || '5000';
+//starting server
 app.listen(port,()=>{
-    console.log("hello");
+    console.log("server is starting");
 })
 app.use(express.json({limit:'1mb'}));
  
 
-
+// storing emails into database from user
 app.post('/email_id',async(req,res)=>{
     try {
         const {title} = req.body;
@@ -35,7 +36,7 @@ app.post('/email_id',async(req,res)=>{
          console.log(error.message);
       }
 });
-
+// send scrabed feeds to fronend as per the request
     app.get('/feeds/:category',async(req,res)=>{
             try {
                  var category = req.params.category;
@@ -65,7 +66,7 @@ app.post('/email_id',async(req,res)=>{
                  console.log(error.message);
               }
         });
- 
+ // calling scrabing for infinite times for updating feeds
 setInterval(()=>{
     require('./sc');
 },20000);
