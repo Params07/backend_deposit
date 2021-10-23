@@ -40,7 +40,7 @@ app.post('/email_id',async(req,res)=>{
     app.get('/feeds/:category',async(req,res)=>{
             try {
                  var category = req.params.category;
-                    if(category=="data")
+                    if(category=="home")
                     {
                         const newemail = await pool.query("SELECT * FROM feeds");
                         res.json(newemail.rows);
