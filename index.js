@@ -2,19 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const pool = require('./database');
 const app = express();
-const scrabedata = require('./sc);
+const scrabedata = require('./sc')
 
 app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || '5000';
-//starting server
 app.listen(port,()=>{
-    console.log("server is starting");
+    console.log("hello");
 })
 app.use(express.json({limit:'1mb'}));
  
 
-// storing emails into database from user
+
 app.post('/email_id',async(req,res)=>{
     try {
         const {title} = req.body;
@@ -37,7 +36,7 @@ app.post('/email_id',async(req,res)=>{
          console.log(error.message);
       }
 });
-// send scrabed feeds to fronend as per the request
+
     app.get('/feeds/:category',async(req,res)=>{
             try {
                  var category = req.params.category;
@@ -67,11 +66,7 @@ app.post('/email_id',async(req,res)=>{
                  console.log(error.message);
               }
         });
- // calling scrabing for infinite times for updating feeds
-setInterval(()=>{
-    console.log('calling ... scarbedata function');
-    scrabedata();
-},20000);
+
 
 
 
@@ -82,3 +77,7 @@ setInterval(()=>{
     
 
         
+setInterval(()=>{
+    console.log('calling ... scarbedata function');
+    scrabedata();
+},20000);
