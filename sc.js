@@ -3,9 +3,10 @@ const cheerio= require("cheerio");
 const pool = require('./database');
 const sendemails = require('./email');
 
+//webscrabing....scrabing datas from from various website and stored in database
 function call () { 
     
-    console.log('hi');
+   
 
 
     request('https://www.infoworld.com/category/machine-learning/',(error, response, html) => {
@@ -20,7 +21,7 @@ function call () {
         let descrip =  $ (data).find('div[class="post-cont"] > h4').text().trim();
         try{
         const check = await pool.query("SELECT * FROM feeds WHERE TITLE = $1",[tit])
-        
+        // checking for new feeds 
         if(!check.rows.length){
             
             const newfeed = await pool.query("INSERT INTO feeds (Category,TITLE,DESCRIPTION,link,src) VALUES($1,$2,$3,$4,$5)",['ml',tit,descrip,link,src]);
