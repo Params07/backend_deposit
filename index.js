@@ -37,13 +37,18 @@ app.post('/email_id',async(req,res)=>{
       }
 });
 
-    app.get('/feeds',async(req,res)=>{
+    app.get('/feeds/:category',async(req,res)=>{
             try {
-                
+                 var category = req.params.category;
+                    if(category=="home")
+                    {
                         const newemail = await pool.query("SELECT * FROM feeds");
                         res.json(newemail.rows);
                  
-                   
+                    }else {
+                        const newemail = await pool.query("SELECT * FROM feeds  WHERE Category = $1",[category]);
+                        res.json(newemail.rows);
+                    }
                  
                    } catch (error) {
                  console.log(error.message);
